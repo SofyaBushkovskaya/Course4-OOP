@@ -1,6 +1,7 @@
 from typing import Any
 
 import pytest
+
 from src.classes import Category, Product
 
 
@@ -52,7 +53,10 @@ def sample_category() -> Any:
 
 @pytest.fixture
 def sample_product_list() -> list:
-    return [Product("Laptop", "Powerful laptop", 1500, 10), Product("Phone", "Smartphone", 800, 20)]
+    return [
+        Product("Laptop", "Powerful laptop", 1500, 10),
+        Product("Phone", "Smartphone", 800, 20),
+    ]
 
 
 def test_category_initialization(sample_category: Any) -> None:
@@ -69,7 +73,9 @@ def test_product_initialization(sample_product_list: list) -> None:
 
 
 def test_product_creation(sample_product_list: list) -> None:
-    new_product = Product.creating_add_list(sample_product_list, "Laptop", "New powerful laptop", 1700, 5)
+    new_product = Product.creating_add_list(
+        sample_product_list, "Laptop", "New powerful laptop", 1700, 5
+    )
     assert new_product.quantity == 15
     assert len(sample_product_list) == 2
 

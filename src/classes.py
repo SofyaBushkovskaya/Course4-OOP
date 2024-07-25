@@ -1,5 +1,6 @@
 class Category:
     """Класс Категория"""
+
     title: str
     description: str
     __products: list
@@ -33,6 +34,7 @@ class Category:
 
 class Product:
     """Класс Продукт"""
+
     title: str
     description: str
     _price: int

@@ -1,6 +1,5 @@
 from src.classes import Category, Product
 
-
 category1 = Category("Фрукты", "Свежие", ["Яблоко", "Банан", "Киви"])
 
 print(category1.counted_categories, Category.counted_product)
