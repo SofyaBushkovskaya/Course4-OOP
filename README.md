@@ -9,8 +9,9 @@ poetry install
 Создание и получение классов
 4. Тесты
 Запуск тестов командой "pytest --cov"
-покрытие тестами 100%
+покрытие тестами 95%
 5. Модули
 main.py
 utils.py
-test_main.py
+classes.py
+test_classes.py

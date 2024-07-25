@@ -6,7 +6,7 @@ category1 = Category("Фрукты", "Свежие", ["Яблоко", "Бана�
 print(category1.counted_categories, Category.counted_product)
 print(category1.title)
 print(category1.description)
-print(category1.__products)
+print(category1.get_products())
 
 
 product1 = Product("Фрукт", "Свежий", 15, 10)

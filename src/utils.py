@@ -24,7 +24,7 @@ def data_to_class_category(data):
         category.display = (
             f"title - {category.title},"
             f"description - {category.description},"
-            f"products: {category.products}"
+            f"products: {category.get_products()}"
         )
         categories.append(category.display)
     return categories
