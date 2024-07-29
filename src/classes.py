@@ -17,15 +17,15 @@ class Category:
         Category.counted_product += len(self.__products)
 
     @classmethod
-    def add_product(cls, product_list):
+    def add_product(cls, product):
         """Метод добавления продуктов."""
-        cls.__products = product_list
+        cls.__products.append(product)
 
     @property
     def product_list_enter(self):
         """Метод вывода информации о продукте."""
-        product = self.__products[0]
-        return f"{self.title}, {product.price} руб. Остаток: {product.quantity} шт."
+        for product in self.__products:
+            return f"{self.title}, {product.price} руб. Остаток: {product.quantity} шт."
 
     def get_products(self):
         """Метод для получения продукта."""
@@ -70,3 +70,7 @@ class Product:
         """Сеттер для атрибута цены."""
         if new_price <= 0:
             print("Цена введена некорректная.")
+        else:
+            self._price = new_price
+            print(self._price)
+            print("Цена успешно изменена.")

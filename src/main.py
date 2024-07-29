@@ -14,3 +14,8 @@ print(product1.title)
 print(product1.description)
 print(product1.price)
 print(product1.quantity)
+
+product1 = Product("Товар 1", "Описание товара 1", 100.0, 10)
+
+# Устанавливаем новое значение цены с помощью сеттера
+product1.price = 90.0
