@@ -1,6 +1,6 @@
 import json
 
-from src.main import Category, Product
+from src.classes import Category, Product
 
 
 def get_json_data(path_to_json):
@@ -24,7 +24,7 @@ def data_to_class_category(data):
         category.display = (
             f"title - {category.title},"
             f"description - {category.description},"
-            f"products: {category.products}"
+            f"products: {category.get_products()}"
         )
         categories.append(category.display)
     return categories
@@ -39,13 +39,13 @@ def data_to_class_product(data):
                 dict["products"][i]["title"],
                 dict["products"][i]["description"],
                 dict["products"][i]["price"],
-                dict["products"][i]["amount"],
+                dict["products"][i]["quantity"],
             )
             product.display = {
                 f"title - {product.title}",
                 f"description - {product.description}",
                 f"price - {product.price}",
-                f"amounts - {product.amounts}",
+                f"amounts - {product.quantity}",
             }
             products.append(product.display)
     return products
