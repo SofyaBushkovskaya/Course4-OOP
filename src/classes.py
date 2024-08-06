@@ -31,6 +31,12 @@ class Category:
         """Метод для получения продукта."""
         return self.__products
 
+    def __len__(self):
+        return len(self.__products)
+
+    def __str__(self):
+        return f"{self.title}, количество продуктов: {len(self.__products)} шт."
+
 
 class Product:
     """Класс Продукт"""
@@ -74,3 +80,11 @@ class Product:
             self._price = new_price
             print(self._price)
             print("Цена успешно изменена.")
+
+    def __str__(self):
+        return f"{self.title}, {self._price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        if type(self) is type(other):
+            raise TypeError("Можно складывать только одинаковые типы продуктов")
+        return self.price * self.quantity + other.price * other.quantity
