@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Category:
     """Класс Категория"""
 
@@ -54,17 +57,34 @@ class Product:
         self.quantity = quantity
 
     @classmethod
-    def creating_add_list(cls, product_list, title, description, price, quantity):
+    def creating_add_list(
+        cls,
+        products_list: list,
+        title: str,
+        description: str,
+        price: float,
+        quantity: int,
+    ) -> Any:
         """Метод для создания товара и добавления его в список товаров с проверкой наличия дубликата."""
-        for product in product_list:
+        for product in products_list:
             if product.title == title:
                 if product._price < price:
                     product._price = price
                 product.quantity += quantity
                 return product
+
+        # Проверяем, что объект является экземпляром класса Product или его наследником
+        if (
+            not isinstance(title, str)
+            or not isinstance(description, str)
+            or not isinstance(price, float)
+            or not isinstance(quantity, int)
+        ):
+            raise TypeError("Неверный тип данных для создания продукта")
+
         new_product = cls(title, description, price, quantity)
-        product_list.append(new_product)
-        return product_list
+        products_list.append(new_product)
+        return products_list
 
     @property
     def price(self):
@@ -88,3 +108,33 @@ class Product:
         if type(self) is type(other):
             raise TypeError("Можно складывать только одинаковые типы продуктов")
         return self.price * self.quantity + other.price * other.quantity
+
+
+class Smartphone(Product):
+
+    performance: int
+    model: str
+    memory: int
+    color: str
+
+    def __init__(
+        self, title, description, price, quantity, performance, model, memory, color
+    ):
+        super().__init__(title, description, price, quantity)
+        self.performance = performance
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+
+class LawnGrass(Product):
+
+    country: str
+    term: int
+    color: str
+
+    def __init__(self, title, description, price, quantity, country, term, color):
+        super().__init__(title, description, price, quantity)
+        self.country = country
+        self.term = term
+        self.color = color
