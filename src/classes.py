@@ -86,7 +86,7 @@ class Product(BaseProduct, Mixin):
         super().__init__(*args, **kwargs)
 
     @classmethod
-    def creating_add_list(
+    def new_product(
         cls,
         products_list: list,
         title: str,
@@ -137,10 +137,6 @@ class Product(BaseProduct, Mixin):
         if type(self) is type(other):
             raise TypeError("Можно складывать только одинаковые типы продуктов")
         return self.price * self.quantity + other.price * other.quantity
-
-    def new_product(self, *args, **kwargs):
-        """Реализация метода new_product"""
-        pass
 
 
 class Smartphone(Product, Mixin):

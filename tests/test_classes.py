@@ -73,7 +73,7 @@ def test_product_initialization(sample_product_list: list) -> None:
 
 
 def test_product_creation(sample_product_list: list) -> None:
-    new_product = Product.creating_add_list(
+    new_product = Product.new_product(
         sample_product_list, "Laptop", "New powerful laptop", 1700, 5
     )
     assert new_product.quantity == 15

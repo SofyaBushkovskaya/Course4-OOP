@@ -1,4 +1,4 @@
-from src.classes import Category, Product
+from src.classes import Category, LawnGrass, Product, Smartphone
 
 category1 = Category("Фрукты", "Свежие", ["Яблоко", "Банан", "Киви"])
 
@@ -19,3 +19,21 @@ product1 = Product("Товар 1", "Описание товара 1", 100.0, 10)
 
 # Устанавливаем новое значение цены с помощью сеттера
 product1.price = 90.0
+
+smartphone1 = Smartphone(
+    "iPhone 12", "Смартфон фирмы Apple", 60000, 10, "Черный", 4.5, "iPhone 12", 128
+)
+smartphone2 = Smartphone(
+    "Samsung Galaxy S21",
+    "Смартфон фирмы Samsung",
+    50000,
+    15,
+    "Белый",
+    4.8,
+    "Galaxy S21",
+    256,
+)
+
+lawn_grass1 = LawnGrass(
+    "Газонная трава", "трава для газона", 500, 10, "Зеленый", "Россия", 14
+)
