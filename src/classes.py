@@ -157,7 +157,7 @@ class Smartphone(Product, Mixin):
 
     def new_product(self, *args, **kwargs):
         """Реализация метода new_product"""
-        pass
+        return super().new_product(*args, **kwargs)
 
 
 class LawnGrass(Product, Mixin):
@@ -174,4 +174,4 @@ class LawnGrass(Product, Mixin):
 
     def new_product(self, *args, **kwargs):
         """Реализация метода new_product"""
-        pass
+        return super().new_product(*args, **kwargs)
