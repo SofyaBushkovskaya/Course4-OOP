@@ -21,7 +21,8 @@ class Mixin:
 
     def __repr__(self):
         """Вывод для разработчика"""
-        return f"Создан объект класса {self.__class__.__name__}: {self}"
+        attribute = [f"{key}: {value}" for key, value in self.__dict__.items()]
+        return f"Создан объект класса {self.__class__.__name__} с атрибутами {", ".join(attribute)}"
 
 
 class Category:
@@ -86,7 +87,7 @@ class Product(BaseProduct, Mixin):
         super().__init__(*args, **kwargs)
 
     @classmethod
-    def new_product(
+    def creating_add_list(
         cls,
         products_list: list,
         title: str,
@@ -138,6 +139,11 @@ class Product(BaseProduct, Mixin):
             raise TypeError("Можно складывать только одинаковые типы продуктов")
         return self.price * self.quantity + other.price * other.quantity
 
+    @classmethod
+    def new_product(cls, product):
+        title, description, price, quantity = product.values()
+        return cls(title, description, price, quantity)
+
 
 class Smartphone(Product, Mixin):
 
@@ -155,9 +161,14 @@ class Smartphone(Product, Mixin):
         self.color = color
         super().__init__(title, description, price, quantity)
 
-    def new_product(self, *args, **kwargs):
-        """Реализация метода new_product"""
-        return super().new_product(*args, **kwargs)
+    @classmethod
+    def new_product(cls, smartphone):
+        title, description, price, quantity, performance, model, memory, color = (
+            smartphone.values()
+        )
+        return cls(
+            title, description, price, quantity, performance, model, memory, color
+        )
 
 
 class LawnGrass(Product, Mixin):
@@ -172,6 +183,7 @@ class LawnGrass(Product, Mixin):
         self.color = color
         super().__init__(title, description, price, quantity)
 
-    def new_product(self, *args, **kwargs):
-        """Реализация метода new_product"""
-        return super().new_product(*args, **kwargs)
+    @classmethod
+    def new_product(cls, lawngrass):
+        title, description, price, quantity, country, term, color = lawngrass.values()
+        return cls(title, description, price, quantity, country, term, color)

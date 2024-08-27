@@ -8,7 +8,7 @@ print(category1.description)
 print(category1.get_products())
 
 
-product1 = Product("Фрукт", "Свежий", 15, 10)
+product1 = Product("Фрукт", "Свежий", 15.0, 10)
 
 print(product1.title)
 print(product1.description)
@@ -21,19 +21,20 @@ product1 = Product("Товар 1", "Описание товара 1", 100.0, 10)
 product1.price = 90.0
 
 smartphone1 = Smartphone(
-    "iPhone 12", "Смартфон фирмы Apple", 60000, 10, "Черный", 4.5, "iPhone 12", 128
+    "iPhone 12", "Смартфон фирмы Apple", 60000, 10, 4.5, "iPhone 12", 128, "Черный"
 )
 smartphone2 = Smartphone(
     "Samsung Galaxy S21",
     "Смартфон фирмы Samsung",
     50000,
     15,
-    "Белый",
     4.8,
     "Galaxy S21",
     256,
+    "Белый",
 )
 
+
 lawn_grass1 = LawnGrass(
-    "Газонная трава", "трава для газона", 500, 10, "Зеленый", "Россия", 14
+    "Газонная трава", "Трава для газона", 500, 10, "Россия", 14, "Зелёная"
 )
