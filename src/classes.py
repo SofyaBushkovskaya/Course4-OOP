@@ -69,6 +69,14 @@ class Category:
     def __str__(self):
         return f"{self.title}, количество продуктов: {len(self.__products)} шт."
 
+    def average_price(self):
+        try:
+            total_price = sum(product.price for product in self.__products)
+            average = total_price / len(self.__products)
+            return average
+        except ZeroDivisionError:
+            return 0
+
 
 class Product(BaseProduct, Mixin):
     """Класс Продукт"""
@@ -111,6 +119,9 @@ class Product(BaseProduct, Mixin):
             or not isinstance(quantity, int)
         ):
             raise TypeError("Неверный тип данных для создания продукта")
+
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен.")
 
         new_product = cls(title, description, price, quantity)
         products_list.append(new_product)
