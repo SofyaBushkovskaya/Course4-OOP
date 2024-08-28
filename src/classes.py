@@ -1,4 +1,28 @@
+from abc import ABC, abstractmethod
 from typing import Any
+
+
+class BaseProduct(ABC):
+    """Базовый класс"""
+
+    @abstractmethod
+    def new_product(self, *args, **kwargs):
+        """Абстрактный метод"""
+        pass
+
+
+class Mixin:
+    """Класс Миксин"""
+
+    def __init__(self, *args, **kwargs):
+        """Инициализация класса миксин"""
+        super().__init__(*args, **kwargs)
+        print(repr(self))
+
+    def __repr__(self):
+        """Вывод для разработчика"""
+        attribute = [f"{key}: {value}" for key, value in self.__dict__.items()]
+        return f"Создан объект класса {self.__class__.__name__} с атрибутами {", ".join(attribute)}"
 
 
 class Category:
@@ -27,8 +51,13 @@ class Category:
     @property
     def product_list_enter(self):
         """Метод вывода информации о продукте."""
+        list_product = []
         for product in self.__products:
-            return f"{self.title}, {product.price} руб. Остаток: {product.quantity} шт."
+            result = (
+                f"{self.title}, {product.price} руб. Остаток: {product.quantity} шт."
+            )
+            list_product.append(result)
+        return list_product
 
     def get_products(self):
         """Метод для получения продукта."""
@@ -41,7 +70,7 @@ class Category:
         return f"{self.title}, количество продуктов: {len(self.__products)} шт."
 
 
-class Product:
+class Product(BaseProduct, Mixin):
     """Класс Продукт"""
 
     title: str
@@ -49,12 +78,13 @@ class Product:
     _price: int
     quantity: int
 
-    def __init__(self, title, description, price, quantity):
+    def __init__(self, title, description, price, quantity, *args, **kwargs):
         """Метод для инициализации класса."""
         self.title = title
         self.description = description
         self._price = price
         self.quantity = quantity
+        super().__init__(*args, **kwargs)
 
     @classmethod
     def creating_add_list(
@@ -109,8 +139,13 @@ class Product:
             raise TypeError("Можно складывать только одинаковые типы продуктов")
         return self.price * self.quantity + other.price * other.quantity
 
+    @classmethod
+    def new_product(cls, product):
+        title, description, price, quantity = product.values()
+        return cls(title, description, price, quantity)
 
-class Smartphone(Product):
+
+class Smartphone(Product, Mixin):
 
     performance: int
     model: str
@@ -120,21 +155,35 @@ class Smartphone(Product):
     def __init__(
         self, title, description, price, quantity, performance, model, memory, color
     ):
-        super().__init__(title, description, price, quantity)
         self.performance = performance
         self.model = model
         self.memory = memory
         self.color = color
+        super().__init__(title, description, price, quantity)
+
+    @classmethod
+    def new_product(cls, smartphone):
+        title, description, price, quantity, performance, model, memory, color = (
+            smartphone.values()
+        )
+        return cls(
+            title, description, price, quantity, performance, model, memory, color
+        )
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, Mixin):
 
     country: str
     term: int
     color: str
 
     def __init__(self, title, description, price, quantity, country, term, color):
-        super().__init__(title, description, price, quantity)
         self.country = country
         self.term = term
         self.color = color
+        super().__init__(title, description, price, quantity)
+
+    @classmethod
+    def new_product(cls, lawngrass):
+        title, description, price, quantity, country, term, color = lawngrass.values()
+        return cls(title, description, price, quantity, country, term, color)
